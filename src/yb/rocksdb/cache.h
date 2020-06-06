@@ -193,6 +193,9 @@ class Cache {
   // Tries to evict specified amount of bytes from cache.
   virtual size_t Evict(size_t required) { return 0; }
 
+  // Returns the single-touch and multi-touch cache usages for each of the shard.
+  virtual std::vector<std::pair<size_t, size_t>> TEST_GetIndividualUsages() = 0;
+
  private:
   void LRU_Remove(Handle* e);
   void LRU_Append(Handle* e);

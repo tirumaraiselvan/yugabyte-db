@@ -26,6 +26,7 @@
 #include "yb/rocksdb/port/stack_trace.h"
 
 DECLARE_double(cache_single_touch_ratio);
+DECLARE_bool(cache_overflow_single_touch);
 
 namespace rocksdb {
 
@@ -138,6 +139,7 @@ TEST_F(DBBlockCacheTest, TestWithoutCompressedBlockCache) {
   auto options = GetOptions(table_options);
   InitTable(options);
 
+  FLAGS_cache_overflow_single_touch = false;
   std::shared_ptr<Cache> cache = NewLRUCache(0, 0, false);
   table_options.block_cache = cache;
   options.table_factory.reset(new BlockBasedTableFactory(table_options));
@@ -183,6 +185,7 @@ TEST_F(DBBlockCacheTest, TestWithoutCompressedBlockCache) {
     CheckCacheCounters(options, 0, 1, 0, 0);
     iterators[i].reset(iter);
   }
+  FLAGS_cache_overflow_single_touch = true;
 }
 
 #ifdef SNAPPY
@@ -193,6 +196,7 @@ TEST_F(DBBlockCacheTest, TestWithCompressedBlockCache) {
   options.compression = CompressionType::kSnappyCompression;
   InitTable(options);
 
+  FLAGS_cache_overflow_single_touch = false;
   std::shared_ptr<Cache> cache = NewLRUCache(0, 0, false);
   std::shared_ptr<Cache> compressed_cache = NewLRUCache(0, 0, false);
   table_options.block_cache = cache;
@@ -247,6 +251,7 @@ TEST_F(DBBlockCacheTest, TestWithCompressedBlockCache) {
   CheckCompressedCacheCounters(options, 0, 1, 0, 0);
   delete iter;
   iter = nullptr;
+  FLAGS_cache_overflow_single_touch = true;
 }
 #endif
 
