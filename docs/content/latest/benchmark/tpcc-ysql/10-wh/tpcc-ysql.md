@@ -23,7 +23,7 @@ $ ./tpccbenchmark --create=true --load=true --execute=true \
   --nodes=127.0.0.1,127.0.0.2,127.0.0.3
 ```
 
-### TPC-C Benchmark Results
+## 4. TPC-C Benchmark Results
 
 Once the execution is done the TPM-C number along with the efficiency is printed.
 

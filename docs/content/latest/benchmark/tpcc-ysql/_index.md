@@ -31,6 +31,15 @@ isTocNested: true
 ## Overview
 Follow the steps below to run the open-source [oltpbench](https://github.com/oltpbenchmark/oltpbench) TPC-C workload against YugabyteDB YSQL. [TPC-C](http://www.tpc.org/tpcc/) is a popular online transaction processing benchmark that provides metrics you can use to evaluate the performance of YugabyteDB for concurrent transactions of different types and complexity that are either either executed online or queued for deferred execution.
 
+### Results at a glance
+| Warehouses| TPMC | Efficiency
+-------------|-----------|------------|
+10   | 126   | 97.97%
+100  | 1257  | 97.74%
+1000 | 11205 | 87.13%
+
+All the above experiments were done on a 3 node C5.4XLarge cluster deployed in US-West-2a running YugabyteDB v2.1.8.2. The benchmark was running on a C5.9XLarge node that was also deployed in US-West-2a. Each test was run for 30 minutes after the loading of the data.
+
 ## 1. Prerequisites
 
 ### Get TPC-C binaries
@@ -57,7 +66,7 @@ You will need the IP addresses of the nodes in the cluster for the next step.
 {{< /tip>}}
 
 
-### Configure DB connection params (optional)
+## 2. Configure DB connection params (optional)
 
 If not working with the defaults, we can change the username, password, port, etc. using the configuration file at `config/workload_all.xml`. We can also change the terminals or the physical connections being used by the benchmark using the configuration.
 
@@ -77,7 +86,7 @@ If not working with the defaults, we can change the username, password, port, et
 By default the number of terminals is 10 times the number of warehouses which is the max that the TPC-C spec allows. The number of DB connections is the same as the number of warehouses.
 {{< /note >}}
 
-## 2. Run the TPC-C benchmark
+## 3. Run the TPC-C benchmark
 
 <ul class="nav nav-tabs nav-tabs-yb">
   <li >

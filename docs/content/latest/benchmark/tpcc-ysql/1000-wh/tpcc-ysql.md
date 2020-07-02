@@ -32,12 +32,12 @@ $ ./tpccbenchmark --create=true --load=true --execute=true \
   --memory=64G
 ```
 
-### TPC-C Benchmark Results
+## 4. TPC-C Benchmark Results
 
 Once the execution is done the TPM-C number along with the efficiency is printed.
 
 ```
-00:40:02,921 (DBWorkload.java:880) INFO  - Rate limited reqs/s: Results(nanoSeconds=1200000760106, measuredRequests=544170) = 453.47471275929166 requests/sec
+00:40:02,921 (DBWorkload.java:880) INFO  - Rate limited reqs/s: Results(nanoSeconds=1800000760106, measuredRequests=5441700) = 453.47471275929166 requests/sec
 00:40:02,921 (DBWorkload.java:885) INFO  - Num New Order transactions : 223376, time seconds: 1800
 00:40:02,921 (DBWorkload.java:886) INFO  - TPM-C: 11205
 00:40:02,921 (DBWorkload.java:887) INFO  - Efficiency : 87.1306376360809
